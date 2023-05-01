@@ -11,6 +11,11 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-;") 'mc/mark-previous-like-this)
+
 ;; modes
 (auto-save-mode 0)
 (menu-bar-mode 0)
@@ -31,13 +36,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(php-mode smex gruber-darker-theme)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "#181818" :foreground "#e4e4ef" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 155 :width normal :foundry "ADBO" :family "Iosevka")))))
+ '(package-selected-packages
+   '(multiple-cursors rust-mode magit php-mode smex gruber-darker-theme)))
+(add-to-list 'default-frame-alist '(font . "Hack-14"))
+(set-face-attribute 'default t :font "Hack-14")
 
 ;; set C tabulation offset to 4 instead of 2
 (setq-default c-basic-offset 4)
@@ -59,3 +61,9 @@
 
 ;; custom keybinds
 (global-set-key (kbd "C-c d") 'duplicate-line)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
