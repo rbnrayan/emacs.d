@@ -5,22 +5,22 @@ My custom emacs configuration, written with `org-mode` for conveniance and reada
 
 * Getting Started / Installation
 
-** Clone this repository to `~/.emacs.d/`
+** Clone this repository to ~$HOME/.emacs.d/~
 
-#+BEGIN_SRC shell :tangle no
+#+BEGIN_SRC sh :tangle no
   $ git clone https://github.com/rbnrayan/emacs.d ~/.emacs.d
 #+END_SRC
 
-** Extract code blocks into `init.el`
+** Extract code blocks into ~init.el~
 
 Start GNU/Emacs and navigate to this file, or:
 
-#+BEGIN_SRC shell :tangle no
+#+BEGIN_SRC sh :tangle no
   $ emacs ~/.emacs.d/README.org
 #+END_SRC
 
-Then call the `org-babel-tangle` command (`M-x org-babel-tangle <RET>`) to extract all the code blocks into `init.el`.
-(You can also do `C-c C-v t` inside of Emacs)
+Then call the ~org-babel-tangle~ command (~M-x org-babel-tangle <RET>~) to extract all the code blocks into ~init.el~.
+(You can also do ~C-c C-v t~ inside of Emacs)
 
 * General settings
 
@@ -68,7 +68,7 @@ Then call the `org-babel-tangle` command (`M-x org-babel-tangle <RET>`) to extra
 
 * Packages
 
-** Add `melpa` to package-archives list
+** Add ~melpa~ to package-archives list
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
