@@ -7,7 +7,7 @@ My custom emacs configuration, written with `org-mode` for conveniance and reada
 
 ** Clone this repository to `~/.emacs.d/`
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC shell :tangle no
   $ git clone https://github.com/rbnrayan/emacs.d ~/.emacs.d
 #+END_SRC
 
@@ -15,7 +15,7 @@ My custom emacs configuration, written with `org-mode` for conveniance and reada
 
 Start GNU/Emacs and navigate to this file, or:
 
-#+BEGIN_SRC shell
+#+BEGIN_SRC shell :tangle no
   $ emacs ~/.emacs.d/README.org
 #+END_SRC
 
@@ -42,8 +42,8 @@ Then call the `org-babel-tangle` command (`M-x org-babel-tangle <RET>`) to extra
 ** Enable ido-mode and ido-everywhere
 
 #+BEGIN_SRC emacs-lisp
-  (ido-everywhere 1)
   (ido-mode 1)
+  (ido-everywhere 1)
 #+END_SRC
 
 ** Show relative line-numbers in all buffers

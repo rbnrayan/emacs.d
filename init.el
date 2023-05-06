@@ -5,8 +5,8 @@
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
 
-(ido-everywhere 1)
 (ido-mode 1)
+(ido-everywhere 1)
 
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode 1)
