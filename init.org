@@ -1,0 +1,145 @@
+#+TITLE: emacs configuration
+#+PROPERTY: header-args :tangle init.el
+
+My custom emacs configuration, written with `org-mode` for conveniance and readability.
+
+* General settings
+
+** Disable startup screen
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-startup-screen t)
+#+END_SRC
+
+** Disable some default modes
+
+#+BEGIN_SRC emacs-lisp
+  (auto-save-mode 0)
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+#+END_SRC
+
+** Enable ido-mode and ido-everywhere
+
+#+BEGIN_SRC emacs-lisp
+  (ido-everywhere 1)
+  (ido-mode 1)
+#+END_SRC
+
+** Show relative line-numbers in all buffers
+
+#+BEGIN_SRC emacs-lisp
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode 1)
+#+END_SRC
+
+** Auto-save options
+
+#+BEGIN_SRC emacs-lisp
+  (setq backup-directory-alist '(("." . "~/.emacs_saves")))
+  (setq auto-save-default nil)
+#+END_SRC
+
+** Keyboard encoding - UTF-8
+
+#+BEGIN_SRC emacs-lisp
+  (set-keyboard-coding-system 'utf-8)
+#+END_SRC
+
+* Packages
+
+** Add `melpa` to package-archives list
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+#+END_SRC
+
+** Activate all the packages and autoloads
+
+#+BEGIN_SRC emacs-lisp
+  (package-initialize)
+#+END_SRC
+
+** Fetch packages if needed
+
+#+BEGIN_SRC emacs-lisp
+  (or (file-exists-p package-user-dir)
+      (package-refresh-contents))
+#+END_SRC
+
+** Install packages
+
+#+BEGIN_SRC emacs-lisp
+  (setq package-list '(smex magit multiple-cursors doom-themes gruber-darker-theme))
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package)))
+#+END_SRC
+
+* Keybindings
+
+** Smex
+
+#+BEGIN_SRC emacs-lisp
+  (require 'smex)
+  (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
+		    ; when Smex is auto-initialized on its first run.
+
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;; This is your old M-x.
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+#+END_SRC
+
+** Multiple cursors
+
+#+BEGIN_SRC emacs-lisp
+  (require 'multiple-cursors)
+  (global-set-key (kbd "C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-;") 'mc/mark-previous-like-this)
+#+END_SRC
+
+** Custom
+
+#+BEGIN_SRC emacs-lisp
+  (defun duplicate-line ()
+    (interactive)
+    (copy-to-register 'a
+		      (line-beginning-position)
+		      (line-end-position))
+    (move-end-of-line nil)
+    (electric-newline-and-maybe-indent)
+    (insert-register 'a)
+    (move-beginning-of-line nil))
+
+  ;; custom keybinds
+  (global-set-key (kbd "C-c d") 'duplicate-line)
+#+END_SRC
+
+* UI
+
+** Font
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-16"))
+  (set-face-attribute 'default t :font "Ubuntu Mono-16")
+#+END_SRC
+
+** Theme
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'doom-one-light t)
+#+END_SRC
+
+* Language specific
+
+** C
+
+*** Indent case labels with 4 spaces 
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default c-basic-offset 4)
+  (c-set-offset 'case-label '+)
+#+END_SRC

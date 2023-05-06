@@ -1,10 +1,36 @@
-(package-initialize)
+(setq inhibit-startup-screen t)
+
+(auto-save-mode 0)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+(ido-everywhere 1)
+(ido-mode 1)
+
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+
+(setq backup-directory-alist '(("." . "~/.emacs_saves")))
+(setq auto-save-default nil)
+
+(set-keyboard-coding-system 'utf-8)
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
-(require 'smex)   ; Not needed if you use package.el
+(package-initialize)
+
+(or (file-exists-p package-user-dir)
+    (package-refresh-contents))
+
+(setq package-list '(smex magit multiple-cursors doom-themes gruber-darker-theme))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(require 'smex)
 (smex-initialize) ; Can be omitted. This might cause a (minimal) delay
-                  ; when Smex is auto-initialized on its first run.
+		  ; when Smex is auto-initialized on its first run.
 
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -16,39 +42,6 @@
 (global-set-key (kbd "C-.") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-;") 'mc/mark-previous-like-this)
 
-;; modes
-(auto-save-mode 0)
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
-(global-display-line-numbers-mode 1)
-(ido-everywhere 1)
-(ido-mode 1)
-
-(setq backup-directory-alist '(("." . "~/.emacs_saves")))
-(setq auto-save-default nil)   ; stop create #autosave# files
-(setq inhibit-startup-screen t)
-(setq display-line-numbers-type 'relative)
-(load-theme 'gruber-darker t)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(multiple-cursors rust-mode magit php-mode smex gruber-darker-theme)))
-(add-to-list 'default-frame-alist '(font . "Hack-14"))
-(set-face-attribute 'default t :font "Hack-14")
-
-;; set C tabulation offset to 4 instead of 2
-(setq-default c-basic-offset 4)
-(c-set-offset 'case-label '+)
-
-;; accented characters
-(set-keyboard-coding-system 'utf-8)
-
-;; duplicate line keybind
 (defun duplicate-line ()
   (interactive)
   (copy-to-register 'a
@@ -61,9 +54,11 @@
 
 ;; custom keybinds
 (global-set-key (kbd "C-c d") 'duplicate-line)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-16"))
+(set-face-attribute 'default t :font "Ubuntu Mono-16")
+
+(load-theme 'doom-one-light t)
+
+(setq-default c-basic-offset 4)
+(c-set-offset 'case-label '+)
