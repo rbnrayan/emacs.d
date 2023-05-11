@@ -147,14 +147,14 @@ Then call the ~org-babel-tangle~ command (~M-x org-babel-tangle <RET>~) to extra
 ** Font
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'default-frame-alist '(font . "Ubuntu Mono-16"))
-  (set-face-attribute 'default t :font "Ubuntu Mono-16")
+  (add-to-list 'default-frame-alist '(font . "Iosevka-16"))
+  (set-face-attribute 'default t :font "Iosevka-16")
 #+END_SRC
 
 ** Theme
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'doom-one-light t)
+  (load-theme 'doom-zenburn t)
 #+END_SRC
 
 * Language specific
