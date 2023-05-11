@@ -60,9 +60,10 @@ Then call the ~org-babel-tangle~ command (~M-x org-babel-tangle <RET>~) to extra
   (setq auto-save-default nil)
 #+END_SRC
 
-** Keyboard encoding - UTF-8
+** Encoding - UTF-8
 
 #+BEGIN_SRC emacs-lisp
+  (prefer-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
 #+END_SRC
 
